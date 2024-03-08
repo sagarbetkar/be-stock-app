@@ -8,7 +8,7 @@ module.exports = {
             const stockId = new mongoose.Types.ObjectId();
             const trade = new Trade({ stockId, date, price, type });
             await trade.save();
-            res.json({ success: true });
+            res.json({ success: true, message: "Trade added successfully" });
         } catch (err) {
             res.status(500).json({ success: false, error: err.message });
         }
@@ -17,7 +17,7 @@ module.exports = {
         try {
             const { tradeId, date, price, type } = req.body;
             await Trade.findByIdAndUpdate(tradeId, { date, price, type });
-            res.json({ success: true });
+            res.json({ success: true, message: "Trade updated successfully" });
         } catch (err) {
             res.status(500).json({ success: false, error: err.message });
         }
@@ -26,7 +26,7 @@ module.exports = {
         try {
             const { tradeId } = req.body;
             await Trade.findByIdAndDelete(tradeId);
-            res.json({ success: true });
+            res.json({ success: true, message: "Trade deleted successfully" });
         } catch (err) {
             res.status(500).json({ success: false, error: err.message });
         }
